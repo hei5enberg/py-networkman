@@ -9,10 +9,10 @@ adding connections
 
 2. wi-fi
 
-nmcli con add con-name "trfl-gprs" ifname wlan0 type wifi ssid "[ssid]" \
+nmcli con add con-name "trfl-wlan" ifname wlan0 type wifi ssid "[ssid]" \
 ip4 192.168.100.101/24 gw4 192.168.100.1
-nmcli con modify "trfl-gprs" wifi-sec.key-mgmt wpa-psk
-nmcli con modify "trfl-gprs" wifi-sec.psk "[password]"
+nmcli con modify "trfl-wlan" wifi-sec.key-mgmt wpa-psk
+nmcli con modify "trfl-wlan" wifi-sec.psk "[password]"
 
 nmcli radio wifi [on | off ]
 
