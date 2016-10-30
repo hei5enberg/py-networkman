@@ -1,0 +1,35 @@
+network-manager
+===============
+
+install-->>
+-------
+$sudo apt-get install usb-modeswitch
+$sudo apt-get install network-manager
+
+adding connections-->>
+------------------
+$nmcli connection add type gsm con-name "my-artel" ifname "*" apn "airtelgprs.com"
+$nmcli connection add type gsm con-name "my-voda" ifname "*" apn "www"
+$nmcli connection add type gsm con-name "my-aircl" ifname "*" apn "aircelgprs"
+
+connecting-->>
+----------
+$nmcli con up id my-artel
+
+listing conn-->>
+------------
+$nmcli con 
+NAME      UUID                                  TYPE  DEVICE  
+my-artel  2ed8117b-9dbe-4f2b-ab8d-185744228e4a  gsm   ttyACM0 
+my-voda   60380018-66ae-43f6-be86-353419d4252c  gsm   --      
+my-aircl  3bd8a7ab-df11-4aba-838d-953fca09fad8  gsm   -- 
+
+listing devices-->>
+---------------
+$nmcli dev
+DEVICE   TYPE      STATE      CONNECTION 
+ttyACM0  gsm       connected  my-artel   
+ppp0     unknown   connected  ppp0       
+eth0     ethernet  unmanaged  --         
+lo       loopback  unmanaged  --         
+wlan0    wifi      unmanaged  --   
