@@ -1,0 +1,8 @@
+todos
+=====
+
+1. priority settings
+2. wifi scaning
+3. connection real time monitoring / data retrieving
+4. temp connection data store
+5. active connection report

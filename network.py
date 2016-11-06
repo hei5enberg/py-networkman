@@ -6,31 +6,28 @@ class NetwokManager:
         self.con = {"gprs":"trfl-gprs","wlan":"trfl-wlan","eth":"trfl-eth"}
 
     def activate_con(self,con):
-        if os.system("sudo nmcli con up " + str(self.con[con])) == 0:
+        if os.system("sudo nmcli con up " + str(self.con[con])) is 0:
             return True
         return False
 
     def delete_con(self,con):
-        if os.system("sudo nmcli con delete " + str(self.con[con])) == 0:
+        if os.system("sudo nmcli con delete " + str(self.con[con])) is 0:
             return True
         return False
 
     def add_con(self,ctype,conf=None):
         stat = 0
         if ctype == "gprs":
-            if stat is 0:
-                stat = os.system('sudo nmcli connection add type gsm con-name trfl-gprs ifname "*" apn ' + str(conf["apn"]))
+            stat = os.system('sudo nmcli connection add type gsm con-name trfl-gprs ifname "*" apn ' + str(conf["apn"]))
         elif ctype == "wlan":
-            if stat is 0:
-                stat = os.system('sudo nmcli con add con-name trfl-wlan ifname "*" type wifi ssid ' + str(conf["ssid"]))
+            stat = os.system('sudo nmcli con add con-name trfl-wlan ifname "*" type wifi ssid ' + str(conf["ssid"]))
             if stat is 0:
                 stat = os.system("sudo nmcli con mod trfl-wlan wifi-sec.key-mgmt wpa-psk wifi-sec.psk " + str(conf["pswd"]))
-            if stat is 0:
-                if not conf["dhcp"]:
-                    stat = os.system('sudo nmcli con mod trfl-wlan ipv4.method manual ipv4.addresses '+str(conf["ip"])+' ipv4.gateway '+str(conf["gateway"])+' ipv4.dns '+str(conf["dns"]))
+                if stat is 0:
+                    if not conf["dhcp"]:
+                        stat = os.system('sudo nmcli con mod trfl-wlan ipv4.method manual ipv4.addresses '+str(conf["ip"])+' ipv4.gateway '+str(conf["gateway"])+' ipv4.dns '+str(conf["dns"]))
         elif ctype == "eth":
-            if stat is 0:
-                stat = os.system('sudo nmcli con add type ethernet con-name trfl-eth ifname "*"')
+            stat = os.system('sudo nmcli con add type ethernet con-name trfl-eth ifname "*"')
             if stat is 0:
                 if not conf["dhcp"]:
                     stat = os.system('sudo nmcli con mod trfl-eth ipv4.method manual ipv4.addresses '+str(conf["ip"])+' ipv4.gateway '+str(conf["gateway"])+' ipv4.dns '+str(conf["dns"]))
@@ -65,7 +62,7 @@ if __name__ == "__main__":
     # nm.eth_set(False,"192.168.0.122/24","192.168.0.1",'"8.8.8.8 8.8.4.4"')
     # nm.wifi_set("TRFL","trfl@123",False,"192.168.0.219/24","192.168.0.1",'"8.8.8.8 8.8.4.4"')
     # nm.wifi_set("TRFL","trfl@123")
-    # nm.wifi_set("TRFL","trfl@123")
-    nm.gprs_set("www")
-    nm.activate_con("gprs")
+    nm.wifi_set("TRFL","trfl@123")
+    # nm.gprs_set("aircelgprs")
+    nm.activate_con("wlan")
     # nm.eth_set()
